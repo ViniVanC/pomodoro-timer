@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Text, Pressable, Center, VStack, HStack } from "native-base";
 
+let firstMinutes = 0;
+let firstSeconds = 3;
+let firstBreakMinutes = 0;
+let firstBreakSeconds = 5;
+// let firstMinutes = 5;
+// let firstSeconds = 0;
+// let firstBreakMinutes = firstMinutes * 0.2;
+// let firstBreakSeconds = 0;
+
 export const PomodoroTimer = () => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [minutes, setMinutes] = useState(firstMinutes);
+  const [seconds, setSeconds] = useState(firstSeconds);
   const [isActive, setIsActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  const [breakMinutes, setBreakMinutes] = useState(0);
-  const [breakSeconds, setBreakSeconds] = useState(3);
-  const [loops, setLoops] = useState(4);
+  const [breakMinutes, setBreakMinutes] = useState(firstBreakMinutes);
+  const [breakSeconds, setBreakSeconds] = useState(firstBreakSeconds);
+  const [loops, setLoops] = useState(2);
 
   useEffect(() => {
     let interval;
@@ -20,8 +29,12 @@ export const PomodoroTimer = () => {
             clearInterval(interval);
             setIsActive(false);
             setIsBreak(true);
-            setBreakMinutes(0);
-            setBreakSeconds(3);
+            if (loops === 1) {
+              setBreakMinutes(firstMinutes * 0.6);
+            } else {
+              setBreakMinutes(firstBreakMinutes);
+            }
+            setBreakSeconds(firstBreakSeconds);
           } else {
             setMinutes(minutes - 1);
             setSeconds(59);
@@ -46,8 +59,8 @@ export const PomodoroTimer = () => {
           if (breakMinutes === 0) {
             clearInterval(interval);
             setLoops(loops - 1);
-            setMinutes(0);
-            setSeconds(5);
+            setMinutes(firstMinutes);
+            setSeconds(firstSeconds);
             setIsBreak(false);
           } else {
             setBreakMinutes(breakMinutes - 1);
@@ -70,19 +83,19 @@ export const PomodoroTimer = () => {
 
   const resetTimer = () => {
     setIsActive(false);
-    setMinutes(0);
-    setSeconds(5);
+    setMinutes(firstMinutes);
+    setSeconds(firstSeconds);
     setIsBreak(false);
-    setBreakMinutes(0);
-    setBreakSeconds(3);
-    setLoops(4);
+    setBreakMinutes(firstBreakMinutes);
+    setBreakSeconds(firstBreakSeconds);
+    setLoops(2);
   };
 
   const formatTime = (time) => (time < 10 ? `0${time}` : `${time}`);
 
   return (
     <Center flex={1}>
-      <VStack alignItems={"center"}>
+      <VStack w={"full"} alignItems={"center"}>
         <Pressable
           onPress={resetTimer}
           _pressed={{ transform: [{ scale: 0.9 }] }}
@@ -100,7 +113,7 @@ export const PomodoroTimer = () => {
           color={"#FFBE26"}
           fontSize={"70px"}
           fontWeight={700}
-          w={"full"}
+          w={"100%"}
           textAlign={"center"}
           style={styles.textShadow}
         >
@@ -110,8 +123,9 @@ export const PomodoroTimer = () => {
         </Text>
 
         <HStack space={"10px"}>
-          {new Array(loops).fill(0).map(() => (
+          {new Array(loops).fill(0).map((_item, i) => (
             <Text
+              key={i}
               color={"#FFBE26"}
               fontSize={"30px"}
               textAlign={"center"}
@@ -124,7 +138,11 @@ export const PomodoroTimer = () => {
 
         <Pressable
           onPress={toggleTimer}
+          disabled={isBreak}
           _pressed={{ transform: [{ scale: 0.9 }] }}
+          _disabled={{
+            opacity: 0.5,
+          }}
         >
           <Text
             w={"100px"}
@@ -144,12 +162,12 @@ export const PomodoroTimer = () => {
 const styles = {
   textShadow: {
     textShadowColor: "#FFBE26",
-    textShadowRadius: 10,
+    textShadowRadius: 15,
     textShadowOffset: {
       width: 0,
       height: 0,
     },
     elevation: 10, // Додає тінь (для Android)
-    opacity: 0.7,
+    opacity: 0.5,
   },
 };
