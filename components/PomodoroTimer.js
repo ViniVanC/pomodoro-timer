@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Text, Pressable, Center, VStack, HStack } from "native-base";
 
 let firstMinutes = 0;
-let firstSeconds = 3;
+let firstSeconds = 1;
 let firstBreakMinutes = 0;
-let firstBreakSeconds = 5;
+let firstBreakSeconds = 1;
+let firstLoops = 1;
 // let firstMinutes = 5;
 // let firstSeconds = 0;
 // let firstBreakMinutes = firstMinutes * 0.2;
@@ -17,7 +18,7 @@ export const PomodoroTimer = () => {
   const [isBreak, setIsBreak] = useState(false);
   const [breakMinutes, setBreakMinutes] = useState(firstBreakMinutes);
   const [breakSeconds, setBreakSeconds] = useState(firstBreakSeconds);
-  const [loops, setLoops] = useState(2);
+  const [loops, setLoops] = useState(firstLoops);
 
   useEffect(() => {
     let interval;
@@ -88,7 +89,7 @@ export const PomodoroTimer = () => {
     setIsBreak(false);
     setBreakMinutes(firstBreakMinutes);
     setBreakSeconds(firstBreakSeconds);
-    setLoops(2);
+    setLoops(firstLoops);
   };
 
   const formatTime = (time) => (time < 10 ? `0${time}` : `${time}`);
@@ -96,65 +97,114 @@ export const PomodoroTimer = () => {
   return (
     <Center flex={1}>
       <VStack w={"full"} alignItems={"center"}>
-        <Pressable
-          onPress={resetTimer}
-          _pressed={{ transform: [{ scale: 0.9 }] }}
-        >
-          <Text
-            color="#FFBE26"
-            fontSize={40}
-            lineHeight={"xs"}
-            style={styles.textShadow}
-          >
-            ⟳
-          </Text>
-        </Pressable>
-        <Text
-          color={"#FFBE26"}
-          fontSize={"70px"}
-          fontWeight={700}
-          w={"100%"}
-          textAlign={"center"}
-          style={styles.textShadow}
-        >
-          {isBreak
-            ? `${formatTime(breakMinutes)}:${formatTime(breakSeconds)}`
-            : `${formatTime(minutes)}:${formatTime(seconds)}`}
-        </Text>
+        {loops !== 0 ? (
+          <>
+            <Pressable
+              onPress={resetTimer}
+              _pressed={{ transform: [{ scale: 0.9 }] }}
+            >
+              <Text
+                color="#FFBE26"
+                fontSize={40}
+                lineHeight={"xs"}
+                style={styles.textShadow}
+              >
+                ⟳
+              </Text>
+            </Pressable>
+            <VStack w={"full"} my={"10px"}>
+              <Text
+                color={"#FFBE26"}
+                fontSize={"30px"}
+                fontWeight={400}
+                w={"100%"}
+                textAlign={"center"}
+                style={styles.textShadow}
+              >
+                {isBreak
+                  ? loops === 1
+                    ? "Long break"
+                    : "Take a little rest"
+                  : "Woooork!"}
+              </Text>
+              <Text
+                color={"#FFBE26"}
+                fontSize={"70px"}
+                lineHeight={"xs"}
+                fontWeight={700}
+                w={"100%"}
+                textAlign={"center"}
+                style={styles.textShadow}
+              >
+                {isBreak
+                  ? `${formatTime(breakMinutes)}:${formatTime(breakSeconds)}`
+                  : `${formatTime(minutes)}:${formatTime(seconds)}`}
+              </Text>
+            </VStack>
 
-        <HStack space={"10px"}>
-          {new Array(loops).fill(0).map((_item, i) => (
+            <HStack space={"10px"}>
+              {new Array(loops).fill(0).map((_item, i) => (
+                <Text
+                  key={i}
+                  color={"#FFBE26"}
+                  fontSize={"30px"}
+                  textAlign={"center"}
+                  style={styles.textShadow}
+                >
+                  ○
+                </Text>
+              ))}
+            </HStack>
+
+            <Pressable
+              onPress={toggleTimer}
+              disabled={isBreak}
+              _pressed={{ transform: [{ scale: 0.9 }] }}
+              _disabled={{
+                opacity: 0.5,
+              }}
+            >
+              <Text
+                w={"100px"}
+                color="#FFBE26"
+                fontSize={25}
+                fontWeight={700}
+                textAlign={"center"}
+                style={styles.textShadow}
+              >
+                {isActive ? "pause" : "play"}
+              </Text>
+            </Pressable>
+          </>
+        ) : (
+          <>
             <Text
-              key={i}
               color={"#FFBE26"}
-              fontSize={"30px"}
+              fontSize={"60px"}
+              fontWeight={700}
+              w={"100%"}
               textAlign={"center"}
               style={styles.textShadow}
             >
-              ○
+              Goood job
             </Text>
-          ))}
-        </HStack>
-
-        <Pressable
-          onPress={toggleTimer}
-          disabled={isBreak}
-          _pressed={{ transform: [{ scale: 0.9 }] }}
-          _disabled={{
-            opacity: 0.5,
-          }}
-        >
-          <Text
-            w={"100px"}
-            color="#FFBE26"
-            fontSize={25}
-            fontWeight={700}
-            textAlign={"center"}
-            style={styles.textShadow}
-          >
-            {isActive ? "pause" : "play"}
-          </Text>
-        </Pressable>
+            <Pressable
+              onPress={() => {
+                setLoops(firstLoops);
+              }}
+              _pressed={{ transform: [{ scale: 0.9 }] }}
+            >
+              <Text
+                color="#FFBE26"
+                fontSize={60}
+                lineHeight={"xs"}
+                style={styles.textShadow}
+              >
+                ⟳
+              </Text>
+            </Pressable>
+          </>
+        )}
       </VStack>
     </Center>
   );
