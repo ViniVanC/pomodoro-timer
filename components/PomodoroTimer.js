@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, Pressable, Center, VStack } from "native-base";
+import { Text, Pressable, Center, VStack, HStack } from "native-base";
 
 export const PomodoroTimer = () => {
   const [minutes, setMinutes] = useState(0);
@@ -82,7 +82,7 @@ export const PomodoroTimer = () => {
 
   return (
     <Center flex={1}>
-      <VStack space={"10px"} alignItems={"center"}>
+      <VStack alignItems={"center"}>
         <Pressable
           onPress={resetTimer}
           _pressed={{ transform: [{ scale: 0.9 }] }}
@@ -102,14 +102,26 @@ export const PomodoroTimer = () => {
           fontWeight={700}
           w={"full"}
           textAlign={"center"}
-          opacity={0.7}
           style={styles.textShadow}
         >
           {isBreak
             ? `${formatTime(breakMinutes)}:${formatTime(breakSeconds)}`
             : `${formatTime(minutes)}:${formatTime(seconds)}`}
         </Text>
-        <Text>{`${loops}/4`}</Text>
+
+        <HStack space={"10px"}>
+          {new Array(loops).fill(0).map(() => (
+            <Text
+              color={"#FFBE26"}
+              fontSize={"30px"}
+              textAlign={"center"}
+              style={styles.textShadow}
+            >
+              ○
+            </Text>
+          ))}
+        </HStack>
+
         <Pressable
           onPress={toggleTimer}
           _pressed={{ transform: [{ scale: 0.9 }] }}
@@ -138,5 +150,6 @@ const styles = {
       height: 0,
     },
     elevation: 10, // Додає тінь (для Android)
+    opacity: 0.7,
   },
 };
