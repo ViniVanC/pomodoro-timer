@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, Pressable, Center, HStack, Icon, VStack } from "native-base";
-import { FontAwesome } from "@expo/vector-icons";
+import { Text, Pressable, Center, VStack } from "native-base";
 
 export const PomodoroTimer = () => {
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(5);
   const [isActive, setIsActive] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
+  const [breakMinutes, setBreakMinutes] = useState(0);
+  const [breakSeconds, setBreakSeconds] = useState(3);
+  const [loops, setLoops] = useState(4);
 
   useEffect(() => {
     let interval;
@@ -16,6 +19,9 @@ export const PomodoroTimer = () => {
           if (minutes === 0) {
             clearInterval(interval);
             setIsActive(false);
+            setIsBreak(true);
+            setBreakMinutes(0);
+            setBreakSeconds(3);
           } else {
             setMinutes(minutes - 1);
             setSeconds(59);
@@ -29,7 +35,34 @@ export const PomodoroTimer = () => {
     }
 
     return () => clearInterval(interval);
-  }, [isActive, minutes, seconds]);
+  }, [isActive, isBreak, minutes, seconds]);
+
+  useEffect(() => {
+    let interval;
+
+    if (isBreak) {
+      interval = setInterval(() => {
+        if (breakSeconds === 0) {
+          if (breakMinutes === 0) {
+            clearInterval(interval);
+            setLoops(loops - 1);
+            setMinutes(0);
+            setSeconds(5);
+            setIsBreak(false);
+          } else {
+            setBreakMinutes(breakMinutes - 1);
+            setBreakSeconds(59);
+          }
+        } else {
+          setBreakSeconds(breakSeconds - 1);
+        }
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [isBreak, breakMinutes, breakSeconds, loops]);
 
   const toggleTimer = () => {
     setIsActive(!isActive);
@@ -37,8 +70,12 @@ export const PomodoroTimer = () => {
 
   const resetTimer = () => {
     setIsActive(false);
-    setMinutes(25);
-    setSeconds(0);
+    setMinutes(0);
+    setSeconds(5);
+    setIsBreak(false);
+    setBreakMinutes(0);
+    setBreakSeconds(3);
+    setLoops(4);
   };
 
   const formatTime = (time) => (time < 10 ? `0${time}` : `${time}`);
@@ -68,8 +105,11 @@ export const PomodoroTimer = () => {
           opacity={0.7}
           style={styles.textShadow}
         >
-          {`${formatTime(minutes)}:${formatTime(seconds)}`}
+          {isBreak
+            ? `${formatTime(breakMinutes)}:${formatTime(breakSeconds)}`
+            : `${formatTime(minutes)}:${formatTime(seconds)}`}
         </Text>
+        <Text>{`${loops}/4`}</Text>
         <Pressable
           onPress={toggleTimer}
           _pressed={{ transform: [{ scale: 0.9 }] }}
