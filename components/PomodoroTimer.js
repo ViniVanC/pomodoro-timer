@@ -95,7 +95,7 @@ export const PomodoroTimer = () => {
   const formatTime = (time) => (time < 10 ? `0${time}` : `${time}`);
 
   return (
-    <Center flex={1}>
+    <Center zIndex={1} flex={1}>
       <VStack w={"full"} alignItems={"center"}>
         {loops !== 0 ? (
           <>
