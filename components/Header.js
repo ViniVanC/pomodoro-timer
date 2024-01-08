@@ -9,20 +9,23 @@ export const Header = () => {
     <HStack zIndex={1} py={"10px"} px={"20px"} justifyContent={"space-between"}>
       <Text
         flex={1}
+        fontFamily={"FiraCode_700Bold"}
         color={"#FFBE26"}
         fontSize={"18px"}
-        fontWeight={700}
         style={styles.textShadow}
       >
         PomoTimer
       </Text>
-      <Pressable _pressed={{ transform: [{ scale: 0.9 }] }}>
+      <Pressable
+        _pressed={{ transform: [{ scale: 0.9 }] }}
+        onPress={() => setShowModal(!showModal)}
+      >
         <Text
           flex={1}
+          fontFamily={"FiraCode_700Bold"}
           color={"#FFBE26"}
           textAlign={"left"}
           fontSize={"18px"}
-          fontWeight={700}
           style={styles.textShadow}
         >
           --help

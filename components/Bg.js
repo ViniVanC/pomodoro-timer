@@ -5,17 +5,18 @@ export const Bg = () => {
   return (
     <Center
       position={"absolute"}
-      top={0}
+      top={100}
       left={0}
       w={"100wv"}
       h={"100wh"}
       zIndex={0}
-      p={"20px"}
+      p={"10px"}
     >
       <Text
         flex={1}
+        fontFamily={"FiraCode_700Bold"}
         color={"#FFBE26"}
-        fontWeight={700}
+        fontSize={12}
         w={"100%"}
         style={styles.textShadow}
       >

@@ -104,6 +104,7 @@ export const PomodoroTimer = () => {
               _pressed={{ transform: [{ scale: 0.9 }] }}
             >
               <Text
+                fontFamily={"FiraCode_400Regular"}
                 color="#FFBE26"
                 fontSize={40}
                 lineHeight={"xs"}
@@ -114,9 +115,9 @@ export const PomodoroTimer = () => {
             </Pressable>
             <VStack w={"full"} my={"10px"}>
               <Text
+                fontFamily={"FiraCode_400Regular"}
                 color={"#FFBE26"}
                 fontSize={"30px"}
-                fontWeight={400}
                 w={"100%"}
                 textAlign={"center"}
                 style={styles.textShadow}
@@ -128,10 +129,10 @@ export const PomodoroTimer = () => {
                   : "Woooork!"}
               </Text>
               <Text
+                fontFamily={"FiraCode_700Bold"}
                 color={"#FFBE26"}
                 fontSize={"70px"}
                 lineHeight={"xs"}
-                fontWeight={700}
                 w={"100%"}
                 textAlign={"center"}
                 style={styles.textShadow}
@@ -145,6 +146,7 @@ export const PomodoroTimer = () => {
             <HStack space={"10px"}>
               {new Array(loops).fill(0).map((_item, i) => (
                 <Text
+                  fontFamily={"FiraCode_400Regular"}
                   key={i}
                   color={"#FFBE26"}
                   fontSize={"30px"}
@@ -166,9 +168,9 @@ export const PomodoroTimer = () => {
             >
               <Text
                 w={"100px"}
+                fontFamily={"FiraCode_700Bold"}
                 color="#FFBE26"
                 fontSize={25}
-                fontWeight={700}
                 textAlign={"center"}
                 style={styles.textShadow}
               >
@@ -179,9 +181,9 @@ export const PomodoroTimer = () => {
         ) : (
           <>
             <Text
+              fontFamily={"FiraCode_700Bold"}
               color={"#FFBE26"}
               fontSize={"60px"}
-              fontWeight={700}
               w={"100%"}
               textAlign={"center"}
               style={styles.textShadow}
@@ -195,6 +197,7 @@ export const PomodoroTimer = () => {
               _pressed={{ transform: [{ scale: 0.9 }] }}
             >
               <Text
+                fontFamily={"FiraCode_400Regular"}
                 color="#FFBE26"
                 fontSize={60}
                 lineHeight={"xs"}
