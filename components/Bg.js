@@ -13,8 +13,29 @@ export const Bg = () => {
       zIndex={0}
       p={"10px"}
     >
-      <TextAnimation fz={12}>
+      <TextAnimation fz={12} delay={1}>
         {`
+▲ (ViniPC) pomodoro-timer [main] neofetch
+            .-/+oossssoo+/-.               vini@ViniPC
+        \`:+ssssssssssssssssss+:\`           -----------
+      -+ssssssssssssssssssyyssss+-         OS: Ubuntu 22.04.3 LTS on Windows 10 x86_64
+    .ossssssssssssssssssdMMMNysssso.       Kernel: 5.15.133.1-microsoft-standard-WSL2
+   /ssssssssssshdmmNNmmyNMMMMhssssss/      Uptime: 1 day, 9 hours, 28 mins
+  +ssssssssshmydMMMMMMMNddddyssssssss+     Packages: 653 (dpkg), 9 (snap)
+ /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Shell: zsh 5.8.1
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Theme: Adwaita [GTK3]
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   Icons: Adwaita [GTK3]
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Terminal: Windows Terminal
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   CPU: AMD PRO A12-9800B R7 4C+8G (4) @ 2.694GHz
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   GPU: dbba:00:00.0 Microsoft Corporation Device 008e
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Memory: 314MiB / 3374MiB
+ /sssssssshNMMMyhhyyyyhdNMMMNhssssssss/
+  +sssssssssdmydMMMMMMMMddddyssssssss+
+   /ssssssssssshdmNNNNmyNMMMMhssssss/
+    .ossssssssssssssssssdMMMNysssso.
+      -+sssssssssssssssssyyyssss+-
+        \`:+ssssssssssssssssss+:\`
+            .-/+oossssoo+/-.
 ▲ (ViniPC) ~ my\ fiels/reactNative/pomodoro-timer
 ▲ (ViniPC) pomodoro-timer [main] l
 total 424K
@@ -45,7 +66,6 @@ Untracked files:
         components/Bg.js
 
 no changes added to commit (use "git add" and/or "git commit -a")
-▲ (ViniPC) pomodoro-timer [main]   
 `}
       </TextAnimation>
     </Center>
