@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, Pressable, Center, VStack, HStack } from "native-base";
 
-let firstMinutes = 0;
-let firstSeconds = 1;
-let firstBreakMinutes = 0;
-let firstBreakSeconds = 1;
+let firstMinutes = 25;
+let firstSeconds = 0;
+let firstBreakMinutes = firstMinutes * 0.2;
+let firstBreakSeconds = 0;
 let firstLoops = 4;
 
 export const PomodoroTimer = () => {
