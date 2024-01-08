@@ -1,25 +1,19 @@
 import { Center, Text } from "native-base";
 import React from "react";
+import { TextAnimation } from "./TypingAnimation";
 
 export const Bg = () => {
   return (
     <Center
       position={"absolute"}
-      top={100}
+      top={50}
       left={0}
       w={"100wv"}
       h={"100wh"}
       zIndex={0}
       p={"10px"}
     >
-      <Text
-        flex={1}
-        fontFamily={"FiraCode_700Bold"}
-        color={"#FFBE26"}
-        fontSize={12}
-        w={"100%"}
-        style={styles.textShadow}
-      >
+      <TextAnimation fz={12}>
         {`
 ▲ (ViniPC) ~ my\ fiels/reactNative/pomodoro-timer
 ▲ (ViniPC) pomodoro-timer [main] l
@@ -51,22 +45,9 @@ Untracked files:
         components/Bg.js
 
 no changes added to commit (use "git add" and/or "git commit -a")
-▲ (ViniPC) pomodoro-timer [main]   █ 
+▲ (ViniPC) pomodoro-timer [main]   
 `}
-      </Text>
+      </TextAnimation>
     </Center>
   );
-};
-
-const styles = {
-  textShadow: {
-    textShadowColor: "#FFBE26",
-    textShadowRadius: 15,
-    textShadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    elevation: 10, // Додає тінь (для Android)
-    opacity: 0.1,
-  },
 };

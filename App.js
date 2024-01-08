@@ -1,5 +1,5 @@
 import React from "react";
-import { NativeBaseProvider, Text, VStack, extendTheme } from "native-base";
+import { NativeBaseProvider, VStack, extendTheme } from "native-base";
 import { PomodoroTimer } from "./components/PomodoroTimer";
 import { Bg } from "./components/Bg";
 import { Header } from "./components/Header";
