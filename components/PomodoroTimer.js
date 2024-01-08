@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, Pressable, Center, VStack, HStack } from "native-base";
 
-let firstMinutes = 25;
-let firstSeconds = 0;
-let firstBreakMinutes = firstMinutes * 0.2;
-let firstBreakSeconds = 0;
+let firstMinutes = 0;
+let firstSeconds = 1;
+let firstBreakMinutes = 0;
+let firstBreakSeconds = 1;
 let firstLoops = 4;
 
 export const PomodoroTimer = () => {
@@ -110,20 +110,22 @@ export const PomodoroTimer = () => {
               </Text>
             </Pressable>
             <VStack w={"full"} my={"10px"}>
-              <Text
-                fontFamily={"FiraCode_400Regular"}
-                color={"#FFBE26"}
-                fontSize={"30px"}
-                w={"100%"}
-                textAlign={"center"}
-                style={styles.textShadow}
-              >
-                {isBreak
-                  ? loops === 1
-                    ? "Long break"
-                    : "Take a little rest"
-                  : "Woooork!"}
-              </Text>
+              {isActive || isBreak ? (
+                <Text
+                  fontFamily={"FiraCode_400Regular"}
+                  color={"#FFBE26"}
+                  fontSize={"30px"}
+                  w={"100%"}
+                  textAlign={"center"}
+                  style={styles.textShadow}
+                >
+                  {isBreak
+                    ? loops === 1
+                      ? "Long break"
+                      : "Take a little rest"
+                    : "Woooork!"}
+                </Text>
+              ) : undefined}
               <Text
                 fontFamily={"FiraCode_700Bold"}
                 color={"#FFBE26"}
